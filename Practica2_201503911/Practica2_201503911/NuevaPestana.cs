@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Practica2_201503911.Analizador;
 
 namespace Practica2_201503911
 {
@@ -56,26 +57,34 @@ namespace Practica2_201503911
         }
 
         //metodo que mandara a analizar el texto escrito
-        public void Analizar()
+        public void analizar()
         {
+            bool resultado = false;
             //se captura la pestaña seleccionada y el siguiente componente que sera el textarea, luego se parseara a string
             String TextoAanalizar = PestañaSeleccionda().GetNextControl(PestañaSeleccionda(), true).Text;
             if (!TextoAanalizar.Equals(""))
             {
-                //se procede al analisis
+                resultado = Analizar.analizador(TextoAanalizar);
+               
+                /*//se procede al analisis
                 String[] lineas = TextoAanalizar.Split('\n');
                 Console.WriteLine("hola perro que pedo");
                 for (int i = 0; i < lineas.Length; i++)
                 {
                     Console.WriteLine(lineas[i]);
                 }
-                PestañaSelecciondaSalida().GetNextControl(PestañaSelecciondaSalida(), true).Text = "hola";
+                PestañaSelecciondaSalida().GetNextControl(PestañaSelecciondaSalida(), true).Text = "hola";*/
+
+                if (resultado) Console.WriteLine("Cadena Correcta.");
+                else Console.WriteLine("Cadena Incorrecta.");
+
+                //return resultado;
             }
             else
-            {              
-
+            {                     
                 MessageBox.Show("Area Vacia", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
+
         }
 
         public void abrir()

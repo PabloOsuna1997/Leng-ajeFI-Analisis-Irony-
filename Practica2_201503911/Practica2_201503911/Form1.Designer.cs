@@ -34,6 +34,7 @@
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarPestañaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.agregarPestañaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.analizarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manualDeUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,10 +42,9 @@
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.Consola = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.agregarPestañaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,15 +78,22 @@
             // abrirToolStripMenuItem
             // 
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.abrirToolStripMenuItem.Text = "Abrir";
             this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
             // 
             // cerrarPestañaToolStripMenuItem
             // 
             this.cerrarPestañaToolStripMenuItem.Name = "cerrarPestañaToolStripMenuItem";
-            this.cerrarPestañaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cerrarPestañaToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.cerrarPestañaToolStripMenuItem.Text = "Cerrar Pestaña";
+            // 
+            // agregarPestañaToolStripMenuItem
+            // 
+            this.agregarPestañaToolStripMenuItem.Name = "agregarPestañaToolStripMenuItem";
+            this.agregarPestañaToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.agregarPestañaToolStripMenuItem.Text = "Agregar Pestaña";
+            this.agregarPestañaToolStripMenuItem.Click += new System.EventHandler(this.agregarPestañaToolStripMenuItem_Click);
             // 
             // analizarToolStripMenuItem
             // 
@@ -139,15 +146,15 @@
             this.tabControl2.Size = new System.Drawing.Size(467, 268);
             this.tabControl2.TabIndex = 6;
             // 
-            // richTextBox1
+            // Consola
             // 
-            this.richTextBox1.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.Location = new System.Drawing.Point(12, 400);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(937, 96);
-            this.richTextBox1.TabIndex = 7;
-            this.richTextBox1.Text = "";
-            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            this.Consola.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Consola.Location = new System.Drawing.Point(12, 400);
+            this.Consola.Name = "Consola";
+            this.Consola.Size = new System.Drawing.Size(937, 96);
+            this.Consola.TabIndex = 7;
+            this.Consola.Text = "";
+            this.Consola.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // label1
             // 
@@ -169,13 +176,6 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Linea:     Columna:       ";
             // 
-            // agregarPestañaToolStripMenuItem
-            // 
-            this.agregarPestañaToolStripMenuItem.Name = "agregarPestañaToolStripMenuItem";
-            this.agregarPestañaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.agregarPestañaToolStripMenuItem.Text = "Agregar Pestaña";
-            this.agregarPestañaToolStripMenuItem.Click += new System.EventHandler(this.agregarPestañaToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -183,7 +183,7 @@
             this.ClientSize = new System.Drawing.Size(977, 525);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.Consola);
             this.Controls.Add(this.tabControl2);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip4);
@@ -209,7 +209,7 @@
         private System.Windows.Forms.ToolStripMenuItem acercaDeToolStripMenuItem;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabControl tabControl2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox Consola;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripMenuItem agregarPestañaToolStripMenuItem;

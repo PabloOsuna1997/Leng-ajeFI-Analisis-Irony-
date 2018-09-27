@@ -43,7 +43,7 @@ namespace Practica2_201503911
 
         private void analizarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            instancia.Analizar();
+            instancia.analizar();
         }
 
         private void agregarPestañaToolStripMenuItem_Click(object sender, EventArgs e)

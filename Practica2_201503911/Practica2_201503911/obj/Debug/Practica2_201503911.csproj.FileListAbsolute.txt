@@ -8,3 +8,15 @@ C:\Users\asddd\OneDrive\Escritorio\clases\Compiladores1\Segundo semestre\Practic
 C:\Users\asddd\OneDrive\Escritorio\clases\Compiladores1\Segundo semestre\Practica2\Practica2_201503911\Practica2_201503911\obj\Debug\Practica2_201503911.csproj.CoreCompileInputs.cache
 C:\Users\asddd\OneDrive\Escritorio\clases\Compiladores1\Segundo semestre\Practica2\Practica2_201503911\Practica2_201503911\obj\Debug\Practica2_201503911.exe
 C:\Users\asddd\OneDrive\Escritorio\clases\Compiladores1\Segundo semestre\Practica2\Practica2_201503911\Practica2_201503911\obj\Debug\Practica2_201503911.pdb
+C:\Users\asddd\OneDrive\Escritorio\clases\Compiladores1\Segundo semestre\Practica2\Pract2\Leng-ajeFI-Analisis-Irony-\Practica2_201503911\Practica2_201503911\bin\Debug\Practica2_201503911.exe.config
+C:\Users\asddd\OneDrive\Escritorio\clases\Compiladores1\Segundo semestre\Practica2\Pract2\Leng-ajeFI-Analisis-Irony-\Practica2_201503911\Practica2_201503911\bin\Debug\Practica2_201503911.exe
+C:\Users\asddd\OneDrive\Escritorio\clases\Compiladores1\Segundo semestre\Practica2\Pract2\Leng-ajeFI-Analisis-Irony-\Practica2_201503911\Practica2_201503911\bin\Debug\Practica2_201503911.pdb
+C:\Users\asddd\OneDrive\Escritorio\clases\Compiladores1\Segundo semestre\Practica2\Pract2\Leng-ajeFI-Analisis-Irony-\Practica2_201503911\Practica2_201503911\obj\Debug\Practica2_201503911.csprojAssemblyReference.cache
+C:\Users\asddd\OneDrive\Escritorio\clases\Compiladores1\Segundo semestre\Practica2\Pract2\Leng-ajeFI-Analisis-Irony-\Practica2_201503911\Practica2_201503911\obj\Debug\Practica2_201503911.Form1.resources
+C:\Users\asddd\OneDrive\Escritorio\clases\Compiladores1\Segundo semestre\Practica2\Pract2\Leng-ajeFI-Analisis-Irony-\Practica2_201503911\Practica2_201503911\obj\Debug\Practica2_201503911.Properties.Resources.resources
+C:\Users\asddd\OneDrive\Escritorio\clases\Compiladores1\Segundo semestre\Practica2\Pract2\Leng-ajeFI-Analisis-Irony-\Practica2_201503911\Practica2_201503911\obj\Debug\Practica2_201503911.csproj.GenerateResource.cache
+C:\Users\asddd\OneDrive\Escritorio\clases\Compiladores1\Segundo semestre\Practica2\Pract2\Leng-ajeFI-Analisis-Irony-\Practica2_201503911\Practica2_201503911\obj\Debug\Practica2_201503911.csproj.CoreCompileInputs.cache
+C:\Users\asddd\OneDrive\Escritorio\clases\Compiladores1\Segundo semestre\Practica2\Pract2\Leng-ajeFI-Analisis-Irony-\Practica2_201503911\Practica2_201503911\obj\Debug\Practica2_201503911.exe
+C:\Users\asddd\OneDrive\Escritorio\clases\Compiladores1\Segundo semestre\Practica2\Pract2\Leng-ajeFI-Analisis-Irony-\Practica2_201503911\Practica2_201503911\obj\Debug\Practica2_201503911.pdb
+C:\Users\asddd\OneDrive\Escritorio\clases\Compiladores1\Segundo semestre\Practica2\Pract2\Leng-ajeFI-Analisis-Irony-\Practica2_201503911\Practica2_201503911\bin\Debug\Irony.dll
+C:\Users\asddd\OneDrive\Escritorio\clases\Compiladores1\Segundo semestre\Practica2\Pract2\Leng-ajeFI-Analisis-Irony-\Practica2_201503911\Practica2_201503911\obj\Debug\Practica2_201503911.csproj.CopyComplete
