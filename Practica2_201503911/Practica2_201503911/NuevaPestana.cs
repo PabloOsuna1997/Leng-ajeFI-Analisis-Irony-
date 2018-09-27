@@ -73,6 +73,9 @@ namespace Practica2_201503911
                 {
                     Console.WriteLine(lineas[i]);
                 }
+
+
+                //respuesta que se mostrara en la pestaña de salida.
                 PestañaSelecciondaSalida().GetNextControl(PestañaSelecciondaSalida(), true).Text = "hola";*/
 
                 if (resultado) Console.WriteLine("Cadena Correcta.");
