@@ -1,0 +1,6 @@
+Descargar dll para poder utilizar la herramienta de irony
+
+https://drive.google.com/open?id=1aNuB49uXk1egU2bnKiQwuqjGhpxkvIkn
+
+1.Descarga
+2.copia el archivo a la carpeta Practica2_201503911 junto al archivo con extension .sln
