@@ -19,7 +19,7 @@ namespace Practica2_201503911.Analizador
             //numeros 
             RegexBasedTerminal Entero = new RegexBasedTerminal("Entero", "[0-9]+");
             //id
-            IdentifierTerminal Id = new IdentifierTerminal("Id", "([a-zA-Z] |_)([a-zA-Z] |[0-9]|_)*");
+            IdentifierTerminal Id = new IdentifierTerminal("Id", "([a-zA-Z]|_)([a-zA-Z]|[0-9]|_)*");
 
 
             #endregion
@@ -60,7 +60,8 @@ namespace Practica2_201503911.Analizador
             var tkOR = ToTerm("||");
             var tkAND = ToTerm("&&");
             var tkPUNTO = ToTerm(".");
-            var tkPUNTOYCOMA = ToTerm(";");            
+            var tkPUNTOYCOMA = ToTerm(";");
+            var tkCOMA = ToTerm(",");
 
             #endregion
 
@@ -68,23 +69,100 @@ namespace Practica2_201503911.Analizador
             #region Non Terminal
             NonTerminal INICIO = new NonTerminal("INICIO"),
                 PARAMETROS = new NonTerminal("PARAMETROS"),
-                SENTENCIAS = new NonTerminal("SENTENCIAS");
-
+                PARAME = new NonTerminal("PARAME"),
+                SENTENCIAS = new NonTerminal("SENTENCIAS"),
+                OPERACIONES = new NonTerminal("OPERACIONES"),
+                OPERACIONES1 = new NonTerminal("OPERACIONES1"),
+                OPERACIONES2 = new NonTerminal("OPERACIONES2"),
+                OPERACIONES3 = new NonTerminal("OPERACIONES3"),
+                OPERACIONES4 = new NonTerminal("OPERACIONES4"),
+                OPERACIONES5 = new NonTerminal("OPERACIONES5"),
+                DECLARACION = new NonTerminal("DECLARACION"),
+                TIPOVAR = new NonTerminal("TIPOVAR"),
+                MASDECLA = new NonTerminal("MASDECLA"),
+                LISTAVARIABLES = new NonTerminal("LISTAVARIABLES"),
+                ASIGNACION = new NonTerminal("ASIGNACION"),
+                POSIBLEASIGNACION = new NonTerminal("POSIBLEASIGNACION"),
+                VAR = new NonTerminal("VAR"),
+                METODO = new NonTerminal("METODO"),
+                MET = new NonTerminal("MET"),
+                LISTASENTENCIAS = new NonTerminal("LISTASENTENCIAS");
             #endregion
 
             //------------>
             #region Gramatica
 
-            INICIO.Rule = tkINT + tkMAIN + tkPARA + tkPARC + tkLLAVA +SENTENCIAS + tkRETURN + "0" + ";" + tkLLAVC
+            INICIO.Rule = tkINT + tkMAIN + tkPARA +PARAMETROS+ tkPARC + tkLLAVA + SENTENCIAS + tkRETURN + "0" + ";" + tkLLAVC
                          ;
 
             SENTENCIAS.Rule = "hola";
+
+            //declaracion de metodos
+
+
+            //declaracion de variables
+
+            DECLARACION.Rule = TIPOVAR + Id + MASDECLA + tkPUNTOYCOMA
+            ;
+
+            TIPOVAR.Rule = tkINT
+                           | tkFLOAT
+                           | tkCHAR
+                           | tkBOOL
+            ;
+
+            MASDECLA.Rule = tkCOMA + LISTAVARIABLES 
+                            |tkIGUAL + OPERACIONES + LISTAVARIABLES
+                            |Empty
+                     
+            ;
+
+            LISTAVARIABLES.Rule = LISTAVARIABLES + tkCOMA + VAR
+                                  |VAR   
+                                  |Empty
+            ;
+
+            VAR.Rule = Id + POSIBLEASIGNACION
+            ;
+
+            POSIBLEASIGNACION.Rule = tkIGUAL + OPERACIONES
+                                     | Empty
+
+            ;
+                       
+            //operaciones
+
+            OPERACIONES.Rule = OPERACIONES + tkMAS + OPERACIONES1
+                              | OPERACIONES1;
+
+            OPERACIONES1.Rule = OPERACIONES1 + tkMENOS + OPERACIONES2
+                               | OPERACIONES2;
+            ;
+
+            OPERACIONES2.Rule = OPERACIONES2 + tkPOR + OPERACIONES3
+                               | OPERACIONES3;
+            ;
+
+            OPERACIONES3.Rule = OPERACIONES3 + tkDIV + OPERACIONES4
+                                | OPERACIONES4;
+            ;
+
+            OPERACIONES4.Rule = OPERACIONES4 + tkPORCENT + OPERACIONES5
+                                | tkMENOS + OPERACIONES5
+                                | OPERACIONES5;
+            ;
+
+            OPERACIONES5.Rule = Entero
+                               | Id
+                               | tkPARA + OPERACIONES + tkPARC
+            ;
+
             #endregion
 
             //preferencias
             //------------>
             #region EstadoInicio  
-            this.Root = INICIO;
+            this.Root = METODO;
             #endregion
         }
     }
