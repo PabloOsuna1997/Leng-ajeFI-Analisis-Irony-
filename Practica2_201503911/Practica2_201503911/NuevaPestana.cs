@@ -64,20 +64,8 @@ namespace Practica2_201503911
             String TextoAanalizar = PestañaSeleccionda().GetNextControl(PestañaSeleccionda(), true).Text;
             if (!TextoAanalizar.Equals(""))
             {
-                resultado = Analizar.analizador(TextoAanalizar);
-               
-                /*//se procede al analisis
-                String[] lineas = TextoAanalizar.Split('\n');
-                Console.WriteLine("hola perro que pedo");
-                for (int i = 0; i < lineas.Length; i++)
-                {
-                    Console.WriteLine(lineas[i]);
-                }
-
-
-                //respuesta que se mostrara en la pestaña de salida.
-                PestañaSelecciondaSalida().GetNextControl(PestañaSelecciondaSalida(), true).Text = "hola";*/
-
+                resultado = Analizar.analizador(TextoAanalizar);        //llamo al metodo analizar de la clase analizar por ende esta public y estatica
+         
                 if (resultado) Console.WriteLine("Cadena Correcta.");
                 else Console.WriteLine("Cadena Incorrecta.");
 
