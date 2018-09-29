@@ -10,6 +10,7 @@ namespace Practica2_201503911.Analizador
 {
     class Analizar
     {
+  
         public static bool analizador(String cadena){
 
             Gramatica grama = new Gramatica();                      
@@ -27,5 +28,7 @@ namespace Practica2_201503911.Analizador
                 return false;        
             }
         }
+
+     
     }
 }

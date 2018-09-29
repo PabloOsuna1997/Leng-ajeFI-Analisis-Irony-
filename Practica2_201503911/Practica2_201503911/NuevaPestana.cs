@@ -29,13 +29,13 @@ namespace Practica2_201503911
 
             Nuevapest = new TabPage("Pestaña");
             Area = new RichTextBox();
-            Area.SetBounds(1, 1, 430, 410);
+            Area.SetBounds(1, 1, 430, 230);
             Area.AcceptsTab = true;
             Nuevapest.Controls.Add(Area);
 
             Salidapest = new TabPage("Salida");
             RichTextBox salida = new RichTextBox();
-            salida.SetBounds(1, 1, 440, 400);
+            salida.SetBounds(1, 1, 440, 230);
             salida.AcceptsTab = true;
             Salidapest.Controls.Add(salida);
 
