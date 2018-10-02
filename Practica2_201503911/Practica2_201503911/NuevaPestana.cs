@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Irony.Parsing;
 using Practica2_201503911.Analizador;
 
 namespace Practica2_201503911
@@ -57,25 +58,30 @@ namespace Practica2_201503911
         }
 
         //metodo que mandara a analizar el texto escrito
-        public void analizar()
+        public bool analizar()
         {
-            bool resultado = false;
+            ParseTreeNode Root;
             //se captura la pestaña seleccionada y el siguiente componente que sera el textarea, luego se parseara a string
             String TextoAanalizar = PestañaSeleccionda().GetNextControl(PestañaSeleccionda(), true).Text;
             if (!TextoAanalizar.Equals(""))
             {
-                resultado = Analizar.analizador(TextoAanalizar);        //llamo al metodo analizar de la clase analizar por ende esta public y estatica
-         
-                if (resultado) Console.WriteLine("Cadena Correcta.");
-                else Console.WriteLine("Cadena Incorrecta.");
-
-                //return resultado;
+                Root = Analizar.analizador(TextoAanalizar);        //llamo al metodo analizar de la clase analizar por ende esta public y estatica
+                if (Root != null)
+                {
+                    Acciones.RealizarAcciones(Root);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {                     
                 MessageBox.Show("Area Vacia", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return false;
             }
-
+            
         }
 
         public void abrir()
@@ -83,7 +89,7 @@ namespace Practica2_201503911
             try
             {
                 OpenFileDialog abrir = new OpenFileDialog();
-                abrir.Filter = "All Files (*.xml)|*.xml"; // tipos de formatos
+                abrir.Filter = "All Files (*.fi)|*.fi"; // tipos de formatos
                 if (abrir.ShowDialog() == System.Windows.Forms.DialogResult.OK && abrir.FileName.Length > 0)
                 {
                     Area.LoadFile(abrir.FileName, RichTextBoxStreamType.PlainText);
@@ -97,5 +103,6 @@ namespace Practica2_201503911
                 MessageBox.Show("No se pudo abrir el archivo.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
+
     }
 }

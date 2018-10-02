@@ -13,7 +13,7 @@ namespace Practica2_201503911.Analizador
     class Analizar
     {
   
-        public static bool analizador(String cadena){
+        public static ParseTreeNode analizador(String cadena){
 
             Gramatica grama = new Gramatica();                      
             LanguageData lenguaje = new LanguageData(grama);       
@@ -24,15 +24,15 @@ namespace Practica2_201503911.Analizador
             if (NodoRaiz != null)
             {
                 generardot(NodoRaiz);
-                return true;
+                return NodoRaiz;
             }
             else
             {
-                return false;        
+                return null;        
             }
         }
 
-        private static void generardot(ParseTreeNode Raiz) {
+        private static void generardot(ParseTreeNode Raiz){
             String dot = GeneracionDOT.GeneracionDot(Raiz);
 
             try { 
@@ -42,12 +42,9 @@ namespace Practica2_201503911.Analizador
             }
             catch (Exception e)
             {
-                Console.WriteLine("Exception: " + e.Message);
+                Console.WriteLine("No se genero dot: "+ e);
             }
-            finally
-            {
-                Console.WriteLine("Executing finally block.");
-            }
+            
         }
             
     }

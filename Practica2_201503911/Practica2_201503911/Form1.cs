@@ -43,7 +43,10 @@ namespace Practica2_201503911
 
         private void analizarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            instancia.analizar();
+            bool resultado = instancia.analizar();
+            
+            if (resultado) Console.WriteLine("Cadena Correcta.");
+            else Console.WriteLine("Cadena Incorrecta.");
         }
 
         private void agregarPestañaToolStripMenuItem_Click(object sender, EventArgs e)

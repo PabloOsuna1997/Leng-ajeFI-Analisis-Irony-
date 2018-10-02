@@ -19,8 +19,8 @@ namespace Practica2_201503911.Analizador
             #region ExpresionesRegulares
             //numeros 
             RegexBasedTerminal Entero = new RegexBasedTerminal("Entero", "[0-9]+");
-
             RegexBasedTerminal Decimal = new RegexBasedTerminal("Decimal", "[0-9]+[.][0-9]+");
+
             //id
             IdentifierTerminal Id = new IdentifierTerminal("Id");
 
@@ -38,7 +38,6 @@ namespace Practica2_201503911.Analizador
             var tkFLOAT = ToTerm("float");
             var tkBOOL = ToTerm("bool");
             var tkCHAR = ToTerm("char");
-
             var tkMAIN = ToTerm("main");
             var tkRETURN = ToTerm("return");
             var tkTRUE = ToTerm("true");
@@ -93,8 +92,7 @@ namespace Practica2_201503911.Analizador
                 POSIBLEASIGNACION = new NonTerminal("POSIBLEASIGNACION"),
                 VAR = new NonTerminal("VAR"),
                 METODO = new NonTerminal("METODO"),
-                MET = new NonTerminal("MET"),
-                
+                MET = new NonTerminal("MET"),                
                 PARAME = new NonTerminal("PARAME"),
                 LLAMADA = new NonTerminal("LLAMADA"),
                 LVARIABLES = new NonTerminal("LVARIABLES"),
@@ -124,8 +122,7 @@ namespace Practica2_201503911.Analizador
 
             //------------>
             #region Gramatica
-
-           
+                       
             INICIO.Rule = INICIO + INSTRUCCIONES
                           |INSTRUCCIONES
             ;
