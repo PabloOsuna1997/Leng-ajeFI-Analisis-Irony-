@@ -255,6 +255,7 @@ namespace Practica2_201503911.Analizador
                                | tkPARA + OPERACIONES + tkPARC
                                | LLAMADA
                                | Cadena
+                               |BOOLEANOS
 
             ;
             #endregion
@@ -265,7 +266,7 @@ namespace Practica2_201503911.Analizador
             PRINT.Rule = tkPRINT + tkPARA + LEXPRESION + tkPARC + tkPUNTOYCOMA
             ;
 
-            LEXPRESION.Rule = LEXPRESION + tkMAS + OPERACIONES      //tambien lo usare para el retorn y asi tambien pueda devolver concatenaciones 
+            LEXPRESION.Rule = LEXPRESION + tkCOMA + OPERACIONES      //tambien lo usare para el retorn y asi tambien pueda devolver concatenaciones 
                             | OPERACIONES
             ;
             #endregion
