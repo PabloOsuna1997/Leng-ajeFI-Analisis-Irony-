@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Irony.Parsing;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,12 +14,16 @@ namespace Practica2_201503911.Analizador
         String Tipo;
         String Dato;
         List<String> Parametros;
+        ParseTreeNode Retorno;
+        ParseTreeNode Cuerpo;
 
-        public Metodos(String Nombre, String Tipo, List<String> Parametros)
+        public Metodos(String Nombre, String Tipo, List<String> Parametros, ParseTreeNode Retorno,ParseTreeNode Cuerpo)
         {
             this.Nombre = Nombre;
             this.Tipo = Tipo;
             this.Parametros = Parametros;
+            this.Retorno = Retorno;
+            this.Cuerpo = Cuerpo;
         }
 
         public List<String> getParametros()
@@ -51,6 +56,21 @@ namespace Practica2_201503911.Analizador
         {
             this.Dato = Dato;
         }
-    
+        public ParseTreeNode getRetorno()
+        {
+            return Retorno;
+        }
+        public void setRetorno(ParseTreeNode Retorno)
+        {
+            this.Retorno = Retorno;
+        }
+        public ParseTreeNode getCuerpo()
+        {
+            return Cuerpo;
+        }
+        public void setCuerpo(ParseTreeNode Cuerpo)
+        {
+            this.Cuerpo = Cuerpo;
+        }
     }
 }

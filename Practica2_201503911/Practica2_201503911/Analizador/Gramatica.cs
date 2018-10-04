@@ -157,15 +157,14 @@ namespace Practica2_201503911.Analizador
                               |Empty
             ;
 
-            VARIA.Rule = Id
-                        | OPERACIONES
+            VARIA.Rule = OPERACIONES
             ;
             #endregion
 
             #region declaracion de metodos
-            //declaracion de metodos
+            //declaracion de metodos                //<-----------------------CAMBIEN RETURN LEXPRESION POR OPERACIONES 
 
-            METODO.Rule = TIPOVAR + Id + tkPARA + PARAMETROS + tkPARC + tkLLAVA + LISTASENTENCIAS + tkRETURN + LEXPRESION +tkPUNTOYCOMA+ tkLLAVC
+            METODO.Rule = TIPOVAR + Id + tkPARA + PARAMETROS + tkPARC + tkLLAVA + LISTASENTENCIAS + tkRETURN + OPERACIONES +tkPUNTOYCOMA+ tkLLAVC
             ;
 
             PARAMETROS.Rule = PARAMETROS + tkCOMA + PARAME

@@ -12,26 +12,16 @@ namespace Practica2_201503911.Analizador
         String Tipo;
         String Dato;
         String Ambito;
-        List<String> Parametros;
 
-        public Variables(String Nombre , String Tipo, String Dato, String Ambito) {
+        public Variables(String Nombre, String Tipo, String Dato, String Ambito)
+        {
             this.Nombre = Nombre;
             this.Tipo = Tipo;
             this.Dato = Dato;
             this.Ambito = Ambito;
         }
 
-        public Variables(String Nombre, String Tipo, List<String> Parametros)
-        {
-            this.Nombre = Nombre;
-            this.Tipo = Tipo;
-            this.Parametros = Parametros;
-        }
-        public List<String> getParametros()
-        {
-            return Parametros;
-        }
-     
+
         public String getId()
         {
             return Nombre;
