@@ -13,6 +13,7 @@ namespace Practica2_201503911.Analizador
 
         private static String Print = "";
         static String acceso = "";
+        static String acceso1 = "";
         static string idmetodo = "";        //variable que me servira en la llamada de metodos.
         static int contadorparametros = 0;
         static String nombremetodomaximo = "";
@@ -302,13 +303,15 @@ namespace Practica2_201503911.Analizador
 
                 case "IF":
                     acceso = "";
+                    bool bandera = false;
                     // IF.Rule = tkIF + tkPARA + CONDICIONES + tkPARC + tkLLAVA + LISTASENTENCIAS  + tkLLAVC + BLOQUEELSE
                     for (int i = 0; i < Nodo.ChildNodes.Count; i++)
                     {
                         if (i == 2)
                         {
                             acceso = Condiciones(Nodo.ChildNodes[i]);
-                            if (acceso.Equals("true"))
+                            bandera = Convert.ToBoolean(acceso);
+                            if (bandera)
                             {
                                 //Console.WriteLine(acceso); //acceso permitido lee las sentencias de if
                             }
@@ -319,7 +322,7 @@ namespace Practica2_201503911.Analizador
                         }
                         else
                         {
-                            if (acceso == "true" && i == 7)
+                            if (bandera && i == 7)
                             {
                                 break;
                             }
@@ -339,6 +342,7 @@ namespace Practica2_201503911.Analizador
 
                 case "WHILE":
                     acceso = "";
+                    bool bandera1 = false;
                     //WHILE.Rule = tkWHILE + tkPARA + CONDICIONES + tkPARC + tkLLAVA + LISTASENTENCIAS + tkLLAVC
 
                     for (int i = 0; i < Nodo.ChildNodes.Count; i++)
@@ -346,14 +350,15 @@ namespace Practica2_201503911.Analizador
                         if (i == 2)
                         {
                             acceso = Condiciones(Nodo.ChildNodes[i]);
-                            if (!acceso.Equals("true")) i = 6; //acceso denegado  se salta al ultimo token y se acaba el for y no entrara a las sentencias del while.
+                            bandera1 = Convert.ToBoolean(acceso1);
+                            if (!bandera1) i = 6; //acceso denegado  se salta al ultimo token y se acaba el for y no entrara a las sentencias del while.
                         }
                         else
                         {
-                            if (i == 5 && acceso.Equals("true"))
+                            if (i == 5 && bandera1)
                             {
                                 // se va a aquedar enciclado hasta que la condicion se cumpla.
-                                while (!acceso.Equals("false"))
+                                while (!bandera1)
                                 {
                                     Accion(Nodo.ChildNodes[i]);
                                     i = 0;
@@ -369,13 +374,15 @@ namespace Practica2_201503911.Analizador
                     break;
 
                 case "DO":
+                    bool bandera2 = false;
                     //  DO.Rule = tkDO + tkLLAVA + LISTASENTENCIAS + tkLLAVC + tkWHILE + tkPARA + CONDICIONES + tkPARC + tkPUNTOYCOMA
                     for (int i = 0; i < Nodo.ChildNodes.Count; i++)
                     {
                         if (i == 6)
                         {
                             acceso = Condiciones(Nodo.ChildNodes[i]);
-                            if (acceso.Equals("true"))
+                            bandera2 = Convert.ToBoolean(acceso);
+                            if (bandera2)
                             {
                                 i = 0;
                             }
@@ -437,6 +444,7 @@ namespace Practica2_201503911.Analizador
                     break;
             }
         }
+
         public static void LLamadaMetodo(ParseTreeNode Nodo)
         {
             switch (Nodo.Term.Name.ToString())
@@ -1047,16 +1055,19 @@ namespace Practica2_201503911.Analizador
                     break;
 
                 case "IF":
-                    acceso = "";
+                    acceso1 = "";
+                    bool bandera = false;
                     // IF.Rule = tkIF + tkPARA + CONDICIONES + tkPARC + tkLLAVA + LISTASENTENCIAS  + tkLLAVC + BLOQUEELSE
                     for (int i = 0; i < Nodo.ChildNodes.Count; i++)
                     {
                         if (i == 2)
                         {
-                            acceso = Condiciones(Nodo.ChildNodes[i]);
-                            if (acceso.Equals("true"))
+                            acceso1 = Condiciones(Nodo.ChildNodes[i]);
+                            bandera = Convert.ToBoolean(acceso1);
+
+                            if (bandera)
                             {
-                                //Console.WriteLine(acceso); //acceso permitido lee las sentencias de if
+                                Console.WriteLine(acceso1); //acceso permitido lee las sentencias de if
                             }
                             else
                             {
@@ -1065,7 +1076,7 @@ namespace Practica2_201503911.Analizador
                         }
                         else
                         {
-                            if (acceso == "true" && i == 7)
+                            if (bandera && i == 7)
                             {
                                 break;
                             }
@@ -1084,22 +1095,24 @@ namespace Practica2_201503911.Analizador
                     break;
 
                 case "WHILE":
-                    acceso = "";
+                    acceso1 = "";
+                    bool bandera1 = false;
                     //WHILE.Rule = tkWHILE + tkPARA + CONDICIONES + tkPARC + tkLLAVA + LISTASENTENCIAS + tkLLAVC
 
                     for (int i = 0; i < Nodo.ChildNodes.Count; i++)
                     {
                         if (i == 2)
                         {
-                            acceso = Condiciones(Nodo.ChildNodes[i]);
-                            if (!acceso.Equals("true")) i = 6; //acceso denegado  se salta al ultimo token y se acaba el for y no entrara a las sentencias del while.
+                            acceso1 = Condiciones(Nodo.ChildNodes[i]);
+                            bandera1 = Convert.ToBoolean(acceso1);
+                            if (bandera1 == false) i = 6; //acceso denegado  se salta al ultimo token y se acaba el for y no entrara a las sentencias del while.
                         }
                         else
                         {
-                            if (i == 5 && acceso.Equals("true"))
+                            if (i == 5 && bandera1)
                             {
                                 // se va a aquedar enciclado hasta que la condicion se cumpla.
-                                while (!acceso.Equals("false"))
+                                while (bandera1 == true)
                                 {
                                     AccionesMetodo(Nodo.ChildNodes[i]);
                                     i = 0;
@@ -1115,13 +1128,15 @@ namespace Practica2_201503911.Analizador
                     break;
 
                 case "DO":
+                    bool bandera2 = false;
                     //  DO.Rule = tkDO + tkLLAVA + LISTASENTENCIAS + tkLLAVC + tkWHILE + tkPARA + CONDICIONES + tkPARC + tkPUNTOYCOMA
                     for (int i = 0; i < Nodo.ChildNodes.Count; i++)
                     {
                         if (i == 6)
                         {
-                            acceso = Condiciones(Nodo.ChildNodes[i]);
-                            if (acceso.Equals("true"))
+                            acceso1 = Condiciones(Nodo.ChildNodes[i]);
+                            bandera2 = Convert.ToBoolean(acceso1);
+                            if (bandera2)
                             {
                                 i = 0;
                             }
