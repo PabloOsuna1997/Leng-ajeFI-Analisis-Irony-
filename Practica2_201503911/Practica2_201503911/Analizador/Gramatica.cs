@@ -92,7 +92,7 @@ namespace Practica2_201503911.Analizador
                 POSIBLEASIGNACION = new NonTerminal("POSIBLEASIGNACION"),
                 VAR = new NonTerminal("VAR"),
                 METODO = new NonTerminal("METODO"),
-                MET = new NonTerminal("MET"),                
+                MET = new NonTerminal("MET"),
                 PARAME = new NonTerminal("PARAME"),
                 LLAMADA = new NonTerminal("LLAMADA"),
                 LVARIABLES = new NonTerminal("LVARIABLES"),
@@ -122,12 +122,12 @@ namespace Practica2_201503911.Analizador
 
             //------------>
             #region Gramatica
-                       
+
             INICIO.Rule = INICIO + INSTRUCCIONES
-                          |INSTRUCCIONES
+                          | INSTRUCCIONES
             ;
 
-            INSTRUCCIONES.Rule =  DECLARACION
+            INSTRUCCIONES.Rule = DECLARACION
                                  | ASIGNACION
                                  | METODO
             ;
@@ -138,23 +138,25 @@ namespace Practica2_201503911.Analizador
             ;
 
             SENTENCIAS.Rule = LLAMADA + tkPUNTOYCOMA
-                              |DECLARACION
-                              |ASIGNACION
-                              |PRINT
-                              |IF
-                              |WHILE
-                              |DO
-                              |Empty;
-           
+                              | DECLARACION
+                              | ASIGNACION
+                              | PRINT
+                              | IF
+                              | WHILE
+                              | DO
+                              | Empty;
+
             #region LLamada a un metodo
             //llamada a un metodo  (recordar que despues de la llamada de donde se llamo poner ';' si es necesario solo en operaciones no.)
 
-            LLAMADA.Rule = Id + tkPARA + LVARIABLES + tkPARC 
+            LLAMADA.Rule = Id + tkPARA + LVARIABLES + tkPARC
             ;
+
+            LLAMADA.ErrorRule = SyntaxError + ";";
 
             LVARIABLES.Rule = LVARIABLES + tkCOMA + VARIA
                               | VARIA
-                              |Empty
+                              | Empty
             ;
 
             VARIA.Rule = OPERACIONES
@@ -164,8 +166,11 @@ namespace Practica2_201503911.Analizador
             #region declaracion de metodos
             //declaracion de metodos                //<-----------------------CAMBIEN RETURN LEXPRESION POR OPERACIONES 
 
-            METODO.Rule = TIPOVAR + Id + tkPARA + PARAMETROS + tkPARC + tkLLAVA + LISTASENTENCIAS + tkRETURN + OPERACIONES +tkPUNTOYCOMA+ tkLLAVC
+            METODO.Rule = TIPOVAR + Id + tkPARA + PARAMETROS + tkPARC + tkLLAVA + LISTASENTENCIAS + tkRETURN + OPERACIONES + tkPUNTOYCOMA + tkLLAVC
             ;
+
+            METODO.ErrorRule = SyntaxError + "}";
+
 
             PARAMETROS.Rule = PARAMETROS + tkCOMA + PARAME
                               | PARAME
@@ -180,6 +185,8 @@ namespace Practica2_201503911.Analizador
 
             DECLARACION.Rule = TIPOVAR + Id + MASDECLA + tkPUNTOYCOMA
             ;
+
+            DECLARACION.ErrorRule = SyntaxError + ";";
 
             TIPOVAR.Rule = tkINT
                            | tkFLOAT
@@ -215,6 +222,8 @@ namespace Practica2_201503911.Analizador
             //Asignacion de variables 
 
             ASIGNACION.Rule = Id + tkIGUAL + OPERACIONES + tkPUNTOYCOMA;
+
+            ASIGNACION.ErrorRule = SyntaxError + ";";
 
             OPESPECIAL.Rule = tkIGUAL
                               | tkMAS + tkIGUAL
@@ -254,16 +263,18 @@ namespace Practica2_201503911.Analizador
                                | tkPARA + OPERACIONES + tkPARC
                                | LLAMADA
                                | Cadena
-                               |BOOLEANOS
+                               | BOOLEANOS
 
             ;
             #endregion
 
             #region Print
             //print
-            
+
             PRINT.Rule = tkPRINT + tkPARA + LEXPRESION + tkPARC + tkPUNTOYCOMA
             ;
+
+            PRINT.ErrorRule = SyntaxError + ";";
 
             LEXPRESION.Rule = LEXPRESION + tkCOMA + OPERACIONES      //tambien lo usare para el retorn y asi tambien pueda devolver concatenaciones 
                             | OPERACIONES
@@ -273,12 +284,16 @@ namespace Practica2_201503911.Analizador
             #region if-else
             //if-else
 
-            IF.Rule = tkIF + tkPARA + CONDICIONES + tkPARC + tkLLAVA + LISTASENTENCIAS  + tkLLAVC + BLOQUEELSE
+            IF.Rule = tkIF + tkPARA + CONDICIONES + tkPARC + tkLLAVA + LISTASENTENCIAS + tkLLAVC + BLOQUEELSE
             ;
+
+            IF.ErrorRule = SyntaxError + "}";
 
             BLOQUEELSE.Rule = tkELSE + tkLLAVA + LISTASENTENCIAS + tkLLAVC
                               | Empty
             ;
+
+            BLOQUEELSE.ErrorRule = SyntaxError + "}";
             #endregion
 
             #region while
@@ -286,6 +301,8 @@ namespace Practica2_201503911.Analizador
 
             WHILE.Rule = tkWHILE + tkPARA + CONDICIONES + tkPARC + tkLLAVA + LISTASENTENCIAS + tkLLAVC
             ;
+            WHILE.ErrorRule = SyntaxError + "}";
+
             #endregion
 
             #region do-while
@@ -293,6 +310,8 @@ namespace Practica2_201503911.Analizador
 
             DO.Rule = tkDO + tkLLAVA + LISTASENTENCIAS + tkLLAVC + tkWHILE + tkPARA + CONDICIONES + tkPARC + tkPUNTOYCOMA
             ;
+
+            DO.ErrorRule = SyntaxError + "}";
             #endregion
 
             #region Operaciones logicas y relacionales
@@ -329,7 +348,7 @@ namespace Practica2_201503911.Analizador
                                 | CONDICIONES8
             ;
 
-            CONDICIONES8.Rule = OPERACIONES 
+            CONDICIONES8.Rule = OPERACIONES
                                 | BOOLEANOS
                                 | tkPARA + CONDICIONES + tkPARC
             ;

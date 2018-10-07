@@ -45,6 +45,7 @@
             this.Consola = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.Contadorlineas = new System.Windows.Forms.RichTextBox();
             this.menuStrip4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -132,22 +133,25 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Location = new System.Drawing.Point(12, 55);
+            this.tabControl1.Location = new System.Drawing.Point(51, 55);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(441, 268);
+            this.tabControl1.Size = new System.Drawing.Size(477, 268);
             this.tabControl1.TabIndex = 5;
+            this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseClick);
+            this.tabControl1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseMove);
             // 
             // tabControl2
             // 
-            this.tabControl2.Location = new System.Drawing.Point(482, 55);
+            this.tabControl2.Location = new System.Drawing.Point(534, 55);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(467, 268);
+            this.tabControl2.Size = new System.Drawing.Size(415, 268);
             this.tabControl2.TabIndex = 6;
             // 
             // Consola
             // 
+            this.Consola.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.Consola.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Consola.Location = new System.Drawing.Point(12, 400);
             this.Consola.Name = "Consola";
@@ -176,11 +180,20 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Linea:     Columna:       ";
             // 
+            // Contadorlineas
+            // 
+            this.Contadorlineas.Location = new System.Drawing.Point(6, 86);
+            this.Contadorlineas.Name = "Contadorlineas";
+            this.Contadorlineas.Size = new System.Drawing.Size(39, 237);
+            this.Contadorlineas.TabIndex = 10;
+            this.Contadorlineas.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(977, 525);
+            this.Controls.Add(this.Contadorlineas);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Consola);
@@ -213,6 +226,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripMenuItem agregarPestañaToolStripMenuItem;
+        private System.Windows.Forms.RichTextBox Contadorlineas;
     }
 }
 

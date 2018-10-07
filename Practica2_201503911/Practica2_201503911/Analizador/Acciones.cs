@@ -11,6 +11,9 @@ namespace Practica2_201503911.Analizador
     class Acciones
     {
 
+        public static List<String> ErroresSemanticos = new List<string>();
+        public static List<String> Impresiones = new List<string>();
+
         private static String Print = "";
         static String acceso = "";
         static String acceso1 = "";
@@ -33,6 +36,7 @@ namespace Practica2_201503911.Analizador
 
         private static String RESULTADOGENERAL = "";
         private static String Ambito = "";
+        private static String ambitollamada = "";
 
         public static ArrayList TS = new ArrayList();
         public static ArrayList MT = new ArrayList();
@@ -43,6 +47,7 @@ namespace Practica2_201503911.Analizador
             //llamada a metodo que generara la acicon
             Print = "";
             acceso = "";
+            acceso1 = "";
             contadormetodos = 1;
             Id = "";
             tipo = "";
@@ -51,9 +56,18 @@ namespace Practica2_201503911.Analizador
             parame = false;
             RESULTADOGENERAL = "";
             Ambito = "";
-            TS.Clear();
-            MT.Clear();
+            ambitollamada = "";
+            TS = new ArrayList();
+            MT = new ArrayList();
             Parametros_Metodos.Clear();
+            idmetodo = "";        //variable que me servira en la llamada de metodos.
+            contadorparametros = 0;
+            nombremetodomaximo = "";
+            tipometodomaximo = "";
+            soymain = false;
+            Id1 = "";
+            tipo1 = "";
+            ErroresSemanticos.Clear();
 
 
             Accion(Root);
@@ -205,17 +219,18 @@ namespace Practica2_201503911.Analizador
                 #region comentado
                 case "METODO":
 
-                    Ambito = "Metodo" + contadormetodos;
+                    Ambito = "Metodo " + Nodo.ChildNodes[1].Token.Value.ToString();
                     contadormetodos++;
                     ParseTreeNode Retorno = null;
                     ParseTreeNode Cuerpo = Nodo;
+
 
                     parame = false;
                     for (int i = 0; i < Nodo.ChildNodes.Count; i++)
                     {
 
                         if (i == 8) { Retorno = Nodo.ChildNodes[i]; }
-                        //else if (i == 6) { }
+                        if (i == 6 && !Nodo.ChildNodes[1].Token.Value.ToString().Equals("main")) { }
                         else
                         {
                             if (i == 1) { tipometodomaximo = tipo; }
@@ -234,6 +249,7 @@ namespace Practica2_201503911.Analizador
                     Id = "";
                     tipo = "";
                     parame = false;
+
 
                     break;
 
@@ -278,12 +294,16 @@ namespace Practica2_201503911.Analizador
                     }
                     break;
 
+
                 case "PRINT":
                     //PRINT.Rule = tkPRINT + tkPARA + LEXPRESION + tkPARC + tkPUNTOYCOMA
                     Print = "";
                     Accion(Nodo.ChildNodes[2]);
                     Console.WriteLine(Print);
+                    Impresiones.Add(Print);
+
                     break;
+
 
                 case "LEXPRESION":
 
@@ -310,7 +330,7 @@ namespace Practica2_201503911.Analizador
                         if (i == 2)
                         {
                             acceso = Condiciones(Nodo.ChildNodes[i]);
-                            bandera = Convert.ToBoolean(acceso);
+                            if (!acceso.Equals("")) bandera = Convert.ToBoolean(acceso);
                             if (bandera)
                             {
                                 //Console.WriteLine(acceso); //acceso permitido lee las sentencias de if
@@ -350,7 +370,7 @@ namespace Practica2_201503911.Analizador
                         if (i == 2)
                         {
                             acceso = Condiciones(Nodo.ChildNodes[i]);
-                            bandera1 = Convert.ToBoolean(acceso1);
+                            if (!acceso.Equals("")) bandera1 = Convert.ToBoolean(acceso);
                             if (!bandera1) i = 6; //acceso denegado  se salta al ultimo token y se acaba el for y no entrara a las sentencias del while.
                         }
                         else
@@ -358,7 +378,7 @@ namespace Practica2_201503911.Analizador
                             if (i == 5 && bandera1)
                             {
                                 // se va a aquedar enciclado hasta que la condicion se cumpla.
-                                while (!bandera1)
+                                while (bandera1 == true)
                                 {
                                     Accion(Nodo.ChildNodes[i]);
                                     i = 0;
@@ -374,6 +394,7 @@ namespace Practica2_201503911.Analizador
                     break;
 
                 case "DO":
+                    acceso = "";
                     bool bandera2 = false;
                     //  DO.Rule = tkDO + tkLLAVA + LISTASENTENCIAS + tkLLAVC + tkWHILE + tkPARA + CONDICIONES + tkPARC + tkPUNTOYCOMA
                     for (int i = 0; i < Nodo.ChildNodes.Count; i++)
@@ -381,8 +402,8 @@ namespace Practica2_201503911.Analizador
                         if (i == 6)
                         {
                             acceso = Condiciones(Nodo.ChildNodes[i]);
-                            bandera2 = Convert.ToBoolean(acceso);
-                            if (bandera2)
+                            if (!acceso.Equals("")) bandera2 = Convert.ToBoolean(acceso);
+                            if (bandera2 == true)
                             {
                                 i = 0;
                             }
@@ -709,7 +730,8 @@ namespace Practica2_201503911.Analizador
                         }
                         else
                         {
-                            resultado = "Error Semantico.";
+                            resultado = "Error Semantico, variable especificada no existe.";
+                            ErroresSemanticos.Add(resultado);
                         }
                         break;
                 }
@@ -717,7 +739,7 @@ namespace Practica2_201503911.Analizador
             }
             catch (Exception e)
             {
-                resultado = "Error Semantico.";
+                resultado = "Error Semantico de tipo de datos.";
                 return resultado;
             }
         }
@@ -1006,6 +1028,7 @@ namespace Practica2_201503911.Analizador
             switch (Nodo.Term.Name.ToString())
             {
                 case "METODO":
+                    ambitollamada = "Metodo " + Nodo.ChildNodes[1].Token.Value.ToString();
                     AccionesMetodo(Nodo.ChildNodes[6]);
                     break;
 
@@ -1036,6 +1059,8 @@ namespace Practica2_201503911.Analizador
                     Print = "";
                     AccionesMetodo(Nodo.ChildNodes[2]);
                     Console.WriteLine(Print);
+                    Impresiones.Add(Print);
+
                     break;
 
                 case "LEXPRESION":
@@ -1063,7 +1088,7 @@ namespace Practica2_201503911.Analizador
                         if (i == 2)
                         {
                             acceso1 = Condiciones(Nodo.ChildNodes[i]);
-                            bandera = Convert.ToBoolean(acceso1);
+                            if (!acceso1.Equals("")) bandera = Convert.ToBoolean(acceso1);
 
                             if (bandera)
                             {
@@ -1104,7 +1129,7 @@ namespace Practica2_201503911.Analizador
                         if (i == 2)
                         {
                             acceso1 = Condiciones(Nodo.ChildNodes[i]);
-                            bandera1 = Convert.ToBoolean(acceso1);
+                            if (!acceso1.Equals("")) bandera1 = Convert.ToBoolean(acceso1);
                             if (bandera1 == false) i = 6; //acceso denegado  se salta al ultimo token y se acaba el for y no entrara a las sentencias del while.
                         }
                         else
@@ -1128,6 +1153,7 @@ namespace Practica2_201503911.Analizador
                     break;
 
                 case "DO":
+                    acceso1 = "";
                     bool bandera2 = false;
                     //  DO.Rule = tkDO + tkLLAVA + LISTASENTENCIAS + tkLLAVC + tkWHILE + tkPARA + CONDICIONES + tkPARC + tkPUNTOYCOMA
                     for (int i = 0; i < Nodo.ChildNodes.Count; i++)
@@ -1135,7 +1161,7 @@ namespace Practica2_201503911.Analizador
                         if (i == 6)
                         {
                             acceso1 = Condiciones(Nodo.ChildNodes[i]);
-                            bandera2 = Convert.ToBoolean(acceso1);
+                            if (!acceso1.Equals("")) bandera2 = Convert.ToBoolean(acceso1);
                             if (bandera2)
                             {
                                 i = 0;
@@ -1167,7 +1193,116 @@ namespace Practica2_201503911.Analizador
                     }
                     break;
 
+                case "LLAMADA":
+                    bool existemetodo = false;
+                    AccionesMetodo(Nodo.ChildNodes[0]);     //solo capturo el id y ya 
+                    for (int i = 0; i < MT.Count; i++)
+                    {
+                        Metodos met = (Metodos)MT[i];
+                        if (met.getId().Equals(Id1))
+                        {
+                            LLamadaMetodo(Nodo);
+                            AccionesMetodo(met.getCuerpo());
+                            existemetodo = true;
+                            break;
+                        }
+                    }
+                    if (!existemetodo)
+                    {
+                        Console.WriteLine("Error Semantico metodo " + Id1 + " no ha sido declarado.");
+                    }
+                    Id1 = "";
+
+                    break;
+
+
+                #region Declaracion Variables
+                case "DECLARACION":
+
+                    for (int i = 0; i < Nodo.ChildNodes.Count; i++)
+                    {
+                        AccionesMetodo(Nodo.ChildNodes[i]);
+                    }
+                    break;
+
+                case "TIPOVAR":
+                    AccionesMetodo(Nodo.ChildNodes[0]);
+                    break;
+
+                case "MASDECLA":
+
+                    if (Nodo.ChildNodes.Count == 2)         //tkCOMA + LISTAVARIABLES
+                    {
+                        //Console.WriteLine(tipo + " " + Id + ";");
+
+                        TS.Add(new Variables(Id1, tipo1, "", ambitollamada));
+                        Id1 = "";
+                        AccionesMetodo(Nodo.ChildNodes[1]);
+                    }
+                    else if (Nodo.ChildNodes.Count == 3)        //tkIGUAL + OPERACIONES + LISTAVARIABLES
+                    {
+                        for (int i = 0; i < Nodo.ChildNodes.Count; i++)
+                        {
+                            if (i == 1)
+                            {
+                                RESULTADOGENERAL = Operaciones(Nodo.ChildNodes[i]);
+                                // Console.WriteLine(tipo + " " + Id + "= " + RESULTADOGENERAL + ";");
+
+                                TS.Add(new Variables(Id1, tipo1, RESULTADOGENERAL, ambitollamada));
+                                Id = "";
+                                RESULTADOGENERAL = "";
+                            }
+
+                            else Accion(Nodo.ChildNodes[i]);
+
+                        }
+                    }
+                    else        //Empty 
+                    {
+                        //Console.WriteLine(tipo + " " + Id + ";");
+                        TS.Add(new Variables(Id1, tipo1, "", ambitollamada));
+                        Id1 = "";
+                    }
+                    break;
+
+                case "LISTAVARIABLES":
+
+                    for (int i = 0; i < Nodo.ChildNodes.Count; i++)
+                    {
+                        AccionesMetodo(Nodo.ChildNodes[i]);
+                    }
+                    break;
+                case "VAR":
+                    for (int i = 0; i < Nodo.ChildNodes.Count; i++)
+                    {
+                        AccionesMetodo(Nodo.ChildNodes[i]);
+                    }
+                    break;
+
+                case "POSIBLEASIGNACION":
+
+                    if (Nodo.ChildNodes.Count > 0)  // POSIBLEASIGNACION = "=" + OPERACIONES 
+                    {
+                        RESULTADOGENERAL = Operaciones(Nodo.ChildNodes[1]);
+                        // Console.WriteLine(tipo + " " + Id + "= " + RESULTADOGENERAL + ";");
+                        TS.Add(new Variables(Id1, tipo1, RESULTADOGENERAL, ambitollamada));
+                        Id1 = "";
+                        RESULTADOGENERAL = "";
+                    }
+                    else                            //Empty
+                    {
+                        // Console.WriteLine(tipo + " " + Id + ";");
+                        TS.Add(new Variables(Id1, tipo1, "", ambitollamada));
+                        Id1 = "";
+                        RESULTADOGENERAL = "";
+                    }
+                    break;
+
+                #endregion             
+
                 #region TERMINALES
+
+
 
                 case "int":
                 case "bool":
@@ -1189,6 +1324,12 @@ namespace Practica2_201503911.Analizador
                     // Console.WriteLine(Nodo.Term.Name.ToString());
                     break;
             }
+        }
+
+        public bool ValidacionVariables(String NombreVariable, String Ambito)
+        {
+
+            return true;
         }
     }
 }

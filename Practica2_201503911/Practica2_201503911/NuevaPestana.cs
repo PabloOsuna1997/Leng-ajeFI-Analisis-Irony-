@@ -15,8 +15,10 @@ namespace Practica2_201503911
         TabControl Texto;
         TabControl Salida;
         RichTextBox Area;
-        TabPage Nuevapest;
-        TabPage Salidapest;
+        public static TabPage Nuevapest;
+        public static TabPage Salidapest;
+        List<String> Errores = new List<string>();
+        public static int cantidadlineas = 0;
         public NuevaPestana(TabControl Texto, TabControl Salida)
         {
             this.Texto = Texto;
@@ -30,19 +32,22 @@ namespace Practica2_201503911
 
             Nuevapest = new TabPage("Pestaña");
             Area = new RichTextBox();
-            Area.SetBounds(1, 1, 430, 230);
+
+            Area.SetBounds(1, 1, 460, 236);
             Area.AcceptsTab = true;
             Nuevapest.Controls.Add(Area);
 
             Salidapest = new TabPage("Salida");
             RichTextBox salida = new RichTextBox();
-            salida.SetBounds(1, 1, 440, 230);
+            salida.SetBounds(1, 1, 396, 236);
             salida.AcceptsTab = true;
             Salidapest.Controls.Add(salida);
 
             Texto.TabPages.Add(Nuevapest);
             Salida.TabPages.Add(Salidapest);
 
+            Texto.SelectedIndex = Texto.SelectedIndex + 1;
+            Salida.SelectedIndex = Salida.SelectedIndex + 1;
         }
 
 
@@ -63,25 +68,40 @@ namespace Practica2_201503911
             ParseTreeNode Root;
             //se captura la pestaña seleccionada y el siguiente componente que sera el textarea, luego se parseara a string
             String TextoAanalizar = PestañaSeleccionda().GetNextControl(PestañaSeleccionda(), true).Text;
+
             if (!TextoAanalizar.Equals(""))
             {
                 Root = Analizar.analizador(TextoAanalizar);        //llamo al metodo analizar de la clase analizar por ende esta public y estatica
+
                 if (Root != null)
                 {
                     Acciones.RealizarAcciones(Root);
+
+                    PestañaSelecciondaSalida().GetNextControl(PestañaSelecciondaSalida(), true).Text = " ";
+                    List<String> impresiones = Analizador.Acciones.Impresiones;
+                    String impre = "";
+                    for (int i = 0; i < impresiones.Count; i++)
+                    {
+                        impre += impresiones[i] + "\n";
+                        
+                    }
+                    PestañaSelecciondaSalida().GetNextControl(PestañaSelecciondaSalida(), true).Text = impre;
+                    Analizador.Acciones.Impresiones.Clear();
+
                     return true;
                 }
                 else
                 {
+
                     return false;
                 }
             }
             else
-            {                     
+            {
                 MessageBox.Show("Area Vacia", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 return false;
             }
-            
+
         }
 
         public void abrir()
@@ -97,6 +117,12 @@ namespace Practica2_201503911
                     Nuevapest.Text = System.IO.Path.GetFileNameWithoutExtension(path1);
                     Salidapest.Text = System.IO.Path.GetFileNameWithoutExtension(path1);
                 }
+
+                Control con =  PestañaSeleccionda().GetNextControl(PestañaSeleccionda(), true);
+                RichTextBox ri = (RichTextBox)con;
+
+                 cantidadlineas = ri.Lines.Length;
+
             }
             catch (Exception)
             {
