@@ -142,6 +142,8 @@ namespace Practica2_201503911.Analizador
                             {
                                 RESULTADOGENERAL = Operaciones(Nodo.ChildNodes[i]);
                                 // Console.WriteLine(tipo + " " + Id + "= " + RESULTADOGENERAL + ";");
+                                try { if (tipo.Equals("int")) { int num = Convert.ToInt32(RESULTADOGENERAL); } } catch (Exception) { ErroresSemanticos.Add("Error de tipos"); }
+                                try { if (tipo.Equals("bool")) { bool num = Convert.ToBoolean(RESULTADOGENERAL); } } catch (Exception) { ErroresSemanticos.Add("Error de tipos"); }
                                 TS.Add(new Variables(Id, tipo, RESULTADOGENERAL, Ambito));
                                 Id = "";
                                 RESULTADOGENERAL = "";

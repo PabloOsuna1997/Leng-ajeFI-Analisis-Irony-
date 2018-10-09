@@ -1,0 +1,99 @@
+/****************************************************
+************* ORGANIZACION LENGUAJES Y COMPILADORES 1
+************ SEGUNDO SEMESTRE DE 2018
+*********** SECCIONES A,B,C
+********** 
+*********
+********
+*******
+******
+*****
+****
+***
+** CALIFICACION PRACTICA 1 - ARCHIVO 2 - 05/10/2018  
+*****************************************************/
+
+
+bool gbool =true;
+int resultado=0;
+
+
+int ciclosBasico(){	
+	int i=0;
+	int j;
+	while(i <10){
+		 j= i+1;
+		print("Iteracion -> ", i ," : ",j);
+		i = i+1;
+	}
+
+	 j = 10;
+
+	do{
+		 i= j-1;
+		print("Iteracion -> ", j ," : ", i);
+		j = j-1;
+	}while(j>0);
+
+	return 0;
+}
+
+bool ifElse(){
+	
+	bool uno = true;
+	bool dos = false;
+
+	if(uno || dos){
+		print("Entro al primer if, bien -> :)");
+		if(25*2 > 50 ){
+			print("Entro al segundo if, mal -> :( ");		
+		}else{
+			print("Entro al segundo else, bien -> :)");
+		}
+	}else{
+		print("No entro al if, mal -> :( ");
+	}
+	return true;
+}
+char* anidamiento( char* cad1, bool b1, int i1){
+	
+	print("Envio la cadena  -> ",cad1);
+	print("Envio el boleano -> ",b1);
+	print("Envio el entero  -> ",i1);
+
+	i=0;
+	int k=0;
+	while(i<5){
+		 j = 5;
+		while(j>0){
+			 k=1;
+			do{
+				print("Iteracion Anidada -> " , i ," : ", j ," : ",k);
+				k = k +1;
+			}while(k<4);
+			j = j-1;
+		}
+		i = i +1;
+	}
+
+	return "Correcto :)";
+}
+
+int resultado = 0;
+int division (int a, int b) {
+	
+	if(b > a){
+		resultado =  0;
+	} 
+	else{
+		resultado =  division(a-b, b) + 1;
+	}
+	return resultado;
+}
+int main(){
+	ciclosBasico();
+	ifElse();
+	anidamiento("Ahora si viene lo chido :v", true , 75);
+	print("El resultado de la DIV es ->", division (200, 25));
+	return 0;
+}

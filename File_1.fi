@@ -1,0 +1,56 @@
+/****************************************************
+************* ORGANIZACION LENGUAJES Y COMPILADORES 1
+************ SEGUNDO SEMESTRE DE 2018
+*********** SECCIONES A,B,C
+********** 
+*********
+********
+*******
+******
+*****
+****
+***
+** CALIFICACION PRACTICA 1 - ARCHIVO 1 - 05/10/2018  
+*****************************************************/
+
+
+// Vamos a declarar las variables globales
+int gint;
+int g1,g2,g3=3,g4=4;
+bool gbool = true;
+char* gcadena;
+gcadena = "Cadena Global";
+
+int main(){
+	//validamos la dec y asignacion de locales
+	int lint;
+	int l1=1,l2=2,l3,l4;
+	bool lbool = false;
+	//validamos la asignacion de locales y globales
+	lint = 5+5*(1)+(16)-25+(50/(1+1));
+	gint = -2 + 0;
+	// validamos las expresiones relacionales
+	bool lb1 = false;
+	bool lb2 = true;
+	bool lb3 = false;
+	bool lb4 = false;
+	//validamos las expresiones logicas 
+	bool log = false;
+	//validamos las operaciones especiales;
+	int especial = 0;
+	especial = especial + 2;
+	especial = especial - 1;
+	especial = especial +1;
+	especial = especial -1;
+	//vamos a imprimir los resultados 
+	print("Print 0: Almacenamiento de locales -> "+(lint+gint));
+	print("Print 1: Almacenamiento de locales -> "+lint);
+	print("Print 1: Almacenamiento de globales -> "+gint);
+	print("Print 2: Operaciones Aritmeticas -> "+(l1+l2+(g3*g4)));
+	print("Print 3: Mayor es: "+lb1+", igual es: "+lb2+", menor o igual es: "+lb3+", diferente es: "+lb4);
+	print("Print 4: Operaciones Logicas -> "+log);
+	print("Print 5: Operaciones Especiales -> "+especial);
+
+	return 0;
+}
+
